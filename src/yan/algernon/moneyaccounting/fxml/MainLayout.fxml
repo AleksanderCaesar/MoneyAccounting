@@ -5,16 +5,17 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="yan.algernon.moneyaccounting.fxml.MainLayoutController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Открыть" />
-                  <MenuItem mnemonicParsing="false" text="Сохранить" />
-                  <MenuItem mnemonicParsing="false" text="Сохранить как" />
-                  <MenuItem mnemonicParsing="false" text="Выход" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleNew" text="Новый" />
+              <MenuItem mnemonicParsing="false" onAction="#handleOpen" text="Открыть" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleSave" text="Сохранить" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleSave" text="Сохранить как" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Выход" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -42,12 +43,12 @@ public class IncomeViewController {
     
     
     public void initialize(){
-        yearColumn.setCellValueFactory(cellData -> cellData.getValue().getYear());
-        monthColumn.setCellValueFactory(cellData -> cellData.getValue().getMonth());
-        salaryColumn.setCellValueFactory(cellData -> cellData.getValue().getSalary().asObject());
-        prepaymentColumn.setCellValueFactory(cellData -> cellData.getValue().getPrepayment().asObject());
-        otherIncomeColumn.setCellValueFactory(cellData -> cellData.getValue().getOtherIncome().asObject());
-        totalColumn.setCellValueFactory(cellData -> cellData.getValue().getTotal().asObject());
+        yearColumn.setCellValueFactory(new PropertyValueFactory<>("year"));
+        monthColumn.setCellValueFactory(new PropertyValueFactory<>("month"));
+        salaryColumn.setCellValueFactory(new PropertyValueFactory<>("salary"));
+        prepaymentColumn.setCellValueFactory(new PropertyValueFactory<>("prepayment"));
+        otherIncomeColumn.setCellValueFactory(new PropertyValueFactory<>("otherIncome"));
+        totalColumn.setCellValueFactory(new PropertyValueFactory<>("total"));
     }
     
        

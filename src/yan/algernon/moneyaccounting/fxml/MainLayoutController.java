@@ -42,7 +42,7 @@ public class MainLayoutController {
     
     @FXML
     private void handleSave() {
-        File DataFile = mainApp.getDaTAFilePath();
+        File DataFile = mainApp.getDaTaFilePath();
         if (DataFile != null) {
             mainApp.saveDataToFile(DataFile);
         } else {

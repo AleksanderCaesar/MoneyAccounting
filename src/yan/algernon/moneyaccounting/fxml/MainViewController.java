@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -101,11 +102,11 @@ public class MainViewController {
   @FXML
   private void renewData(){
       mainApp.getAllDataForTotalList();
-      yearColumn.setCellValueFactory(cellData -> cellData.getValue().getYear());
-      monthColumn.setCellValueFactory(cellData -> cellData.getValue().getMonth());
-      incomeTotalColumn.setCellValueFactory(cellData -> cellData.getValue().getTotalIncome().asObject());
-      expenseTotalColumn.setCellValueFactory(cellData -> cellData.getValue().getTotalExpense().asObject());
-      differenceColumn.setCellValueFactory(cellData -> cellData.getValue().getDifference().asObject());
+      yearColumn.setCellValueFactory(new PropertyValueFactory<>("year"));
+      monthColumn.setCellValueFactory(new PropertyValueFactory<>("month"));
+      incomeTotalColumn.setCellValueFactory(new PropertyValueFactory<>("totalIncome"));
+      expenseTotalColumn.setCellValueFactory(new PropertyValueFactory<>("totalExpense"));
+      differenceColumn.setCellValueFactory(new PropertyValueFactory<>("difference"));
       totalTable.setItems(mainApp.getTotalList());
       
       

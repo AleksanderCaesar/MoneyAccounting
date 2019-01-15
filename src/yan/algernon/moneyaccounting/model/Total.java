@@ -8,77 +8,65 @@ import javafx.beans.property.StringProperty;
 import yan.algernon.moneyaccounting.MainApp;
 
 public class Total {
-    private StringProperty year;
-    private StringProperty month;
-    private IntegerProperty totalIncome;
-    private IntegerProperty totalExpense;
-    private IntegerProperty difference;
+    private String year;
+    private String month;
+    private int totalIncome;
+    private int totalExpense;
+    private int difference;
     
     private MainApp mainApp;
     
   public Total(){
-      this.difference = new SimpleIntegerProperty();
+      
   }
   
   public Total(String year,String month){
-        this.month = new SimpleStringProperty(month);
-        this.year = new SimpleStringProperty(year);
+        
+        this.year = year;
+        this.month = month;
         this.totalIncome = mainApp.getIncomeByMonthAndYear(year,month).getTotal();
         this.totalExpense = mainApp.getExpenseByMonthAndYear(year, month).getTotal();
-        this.difference = new SimpleIntegerProperty();
+        this.difference = 0;
   }
 
-    public StringProperty getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(StringProperty year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
-    public StringProperty getMonth() {
+    public String getMonth() {
         return month;
     }
 
-    public void setMonth(StringProperty month) {
+    public void setMonth(String month) {
         this.month = month;
     }
 
-    public IntegerProperty getTotalIncome() {
+    public int getTotalIncome() {
         return totalIncome;
     }
 
-    public void setTotalIncome(IntegerProperty totalIncome) {
+    public void setTotalIncome(int totalIncome) {
         this.totalIncome = totalIncome;
     }
 
-    public IntegerProperty getTotalExpense() {
+    public int getTotalExpense() {
         return totalExpense;
     }
 
-    public void setTotalExpense(IntegerProperty totalExpense) {
+    public void setTotalExpense(int totalExpense) {
         this.totalExpense = totalExpense;
     }
 
-    public IntegerProperty getDifference() {
-        int dif = totalIncome.get()-totalExpense.get();
-        difference.set(dif);
-        return difference;
+    public int getDifference() {
+        return totalIncome-totalExpense;
     }
 
-    public int getTotalIncomeInteger(){
-        int inc = totalIncome.get() ;
-        return inc;
+    public void setDifference(int difference) {
+        this.difference = difference;
     }
-    
-    public String getYearString(){
-        return year.get();
-    }
-    
-    public String getMonthString(){
-        return month.get();
-    }
-   
-  
-  
+
 }

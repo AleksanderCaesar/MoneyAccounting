@@ -39,14 +39,14 @@ public class NewWindowExpense {
   
   public void setExpenseData(Expense expense){
       this.expense = expense;
-      yearField.setText(expense.getYearString());
-      monthField.setText(expense.getMonthString());
-      loansField.setText(Integer.toString(expense.getLoansInt()));
-      telInternetField.setText(Integer.toString(expense.getTelInternetInt()));
-      communalExpField.setText(Integer.toString(expense.getCommunalExpensesInt()));
-      foodField.setText(Integer.toString(expense.getFoodInt()));
-      travelCardField.setText(Integer.toString(expense.getTravelCardInt()));
-      otherExpField.setText(Integer.toString(expense.getOtherExpenseInt()));
+      yearField.setText(expense.getYear());
+      monthField.setText(expense.getMonth());
+      loansField.setText(Integer.toString(expense.getLoans()));
+      telInternetField.setText(Integer.toString(expense.getTelephoneInternet()));
+      communalExpField.setText(Integer.toString(expense.getCommunalExpenses()));
+      foodField.setText(Integer.toString(expense.getFood()));
+      travelCardField.setText(Integer.toString(expense.getTravelCard()));
+      otherExpField.setText(Integer.toString(expense.getOtherExpense()));
   }
   
   public boolean isOkClicked() {

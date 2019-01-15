@@ -10,102 +10,76 @@ import javafx.beans.property.StringProperty;
  * @author Alexander
  */
 public class Income {
-    private StringProperty year;
-    private StringProperty month;
-    private IntegerProperty salary;
-    private IntegerProperty prepayment;    
-    private IntegerProperty otherIncome;
-    private IntegerProperty total;
+    private String year;
+    private String month;
+    private int salary;
+    private int prepayment;    
+    private int otherIncome;
+    private int total;
 
     
     
  public Income(){ 
-        this.month = new SimpleStringProperty();
-        this.year = new SimpleStringProperty();
-        this.salary = new SimpleIntegerProperty();
-        this.prepayment = new SimpleIntegerProperty();
-        this.otherIncome = new SimpleIntegerProperty();
-        this.total = new SimpleIntegerProperty();
+         
  }
     
- public Income(String year, String month, int salary, int prepayment, int otherIncome){
-        this.month = new SimpleStringProperty(month);
-        this.year = new SimpleStringProperty(year);
-        this.salary = new SimpleIntegerProperty(salary);
-        this.prepayment = new SimpleIntegerProperty(prepayment);
-        this.otherIncome = new SimpleIntegerProperty(otherIncome);
-        this.total = new SimpleIntegerProperty();
+ public Income(String year, String month,int salary, int pre, int other ){
+        this.month = month;
+        this.year = year;
+        this.salary = salary;
+        this.prepayment = pre;
+        this.otherIncome = other;
+        this.total = 0;
  }
 
-    public StringProperty getYear() {
+    public String getYear() {
         return year;
     }
 
     public void setYear(String year) {
-       this.year.set(year);
+        this.year = year;
     }
 
-    public StringProperty getMonth() {
+    public String getMonth() {
         return month;
     }
 
     public void setMonth(String month) {
-        this.month.set(month); 
+        this.month = month;
     }
 
-    public IntegerProperty getSalary() {
+    public int getSalary() {
         return salary;
     }
 
     public void setSalary(int salary) {
-        this.salary.set(salary);
+        this.salary = salary;
     }
 
-    public IntegerProperty getPrepayment() {
+    public int getPrepayment() {
         return prepayment;
     }
 
     public void setPrepayment(int prepayment) {
-        this.prepayment.set(prepayment); 
+        this.prepayment = prepayment;
     }
 
-    public IntegerProperty getOtherIncome() {
+    public int getOtherIncome() {
         return otherIncome;
     }
 
     public void setOtherIncome(int otherIncome) {
-        this.otherIncome.set(otherIncome); 
+        this.otherIncome = otherIncome;
     }
-    
-    public IntegerProperty getTotal() {        
-        int  totalInt = salary.get()+prepayment.get()+otherIncome.get();
-        total.set(totalInt);
-        return total;
+
+    public int getTotal() {
+        return salary+prepayment+otherIncome;
     }
-    
-    public String getYearString(){
-        return year.get();
+
+    public void setTotal(int total) {
+        this.total = total;
     }
-    
-    public String getMonthString(){
-        return month.get();
-    }
-    
-    public int getSalaryInt(){
-        return salary.get();
-    }
-    
-    public int getPrepaymentInt(){
-        return prepayment.get();
-    }
-    
-    public int getOtherIncomeInt(){
-        return otherIncome.get();
-    }
-    
-    public int getTotalInt(){
-        return total.get();
-    }
+
     
 
 }

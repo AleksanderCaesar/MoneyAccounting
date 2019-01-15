@@ -34,11 +34,11 @@ public class NewWindowIncome {
   
   public void setIncomeData(Income income){
       this.income = income;
-      yearField.setText(income.getYearString());
-      monthField.setText(income.getMonthString());
-      salaryField.setText(Integer.toString(income.getSalaryInt()));
-      prepaymentField.setText(Integer.toString(income.getPrepaymentInt()));
-      otherIncomeField.setText(Integer.toString(income.getOtherIncomeInt()));     
+      yearField.setText(income.getYear());
+      monthField.setText(income.getMonth());
+      salaryField.setText(Integer.toString(income.getSalary()));
+      prepaymentField.setText(Integer.toString(income.getPrepayment()));
+      otherIncomeField.setText(Integer.toString(income.getOtherIncome()));     
   }
   
   public boolean isOkClicked() {

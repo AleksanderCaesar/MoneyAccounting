@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import yan.algernon.moneyaccounting.MainApp;
 import yan.algernon.moneyaccounting.model.Expense;
@@ -38,15 +39,15 @@ public class ExpenseViewController {
     
     
     public void initialize(){
-        yearColumn.setCellValueFactory(cellData -> cellData.getValue().getYear());
-        monthColumn.setCellValueFactory(cellData -> cellData.getValue().getMonth());
-        loansColumn.setCellValueFactory(cellData -> cellData.getValue().getLoans().asObject());
-        telInternetColumn.setCellValueFactory(cellData -> cellData.getValue().getTelephoneInternet().asObject());
-        communalExpColumn.setCellValueFactory(cellData -> cellData.getValue().getCommunalExpenses().asObject());
-        foodColumn.setCellValueFactory(cellData -> cellData.getValue().getFood().asObject());
-        travelCardColumn.setCellValueFactory(cellData -> cellData.getValue().getTravelCard().asObject());
-        otherExpColumn.setCellValueFactory(cellData -> cellData.getValue().getOtherExpense().asObject());
-        totalColumn.setCellValueFactory(cellData -> cellData.getValue().getTotal().asObject());
+        yearColumn.setCellValueFactory(new PropertyValueFactory<>("year"));
+        monthColumn.setCellValueFactory(new PropertyValueFactory<>("month"));
+        loansColumn.setCellValueFactory(new PropertyValueFactory<>("loans"));
+        telInternetColumn.setCellValueFactory(new PropertyValueFactory<>("telephoneInternet"));
+        communalExpColumn.setCellValueFactory(new PropertyValueFactory<>("communalExpenses"));
+        foodColumn.setCellValueFactory(new PropertyValueFactory<>("food"));
+        travelCardColumn.setCellValueFactory(new PropertyValueFactory<>("travelCard"));
+        otherExpColumn.setCellValueFactory(new PropertyValueFactory<>("otherExpense"));
+        totalColumn.setCellValueFactory(new PropertyValueFactory<>("total"));
     }
     
     public void setWindowStage(Stage windowStage){

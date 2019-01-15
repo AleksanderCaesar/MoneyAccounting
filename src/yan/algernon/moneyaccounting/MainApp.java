@@ -1,6 +1,9 @@
 package yan.algernon.moneyaccounting;
 
+import java.beans.XMLEncoder;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.prefs.Preferences;
 import javafx.application.Application;
@@ -9,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
@@ -18,6 +22,12 @@ import javafx.stage.Stage;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import yan.algernon.moneyaccounting.fxml.MainViewController;
 import yan.algernon.moneyaccounting.fxml.NewWindowIncome;
 import yan.algernon.moneyaccounting.model.Expense;
@@ -27,6 +37,8 @@ import yan.algernon.moneyaccounting.fxml.MainLayoutController;
 import yan.algernon.moneyaccounting.fxml.NewWindowExpense;
 import yan.algernon.moneyaccounting.model.DataWrapper;
 import yan.algernon.moneyaccounting.model.Total;
+
+
 
 
 /** 
@@ -44,9 +56,9 @@ public class MainApp extends Application {
     
     public MainApp(){ 
         
-        incomeList.add(new Income("2018","december", 29500,14000,0));
-        incomeList.add(new Income("2018","november", 55000, 14000, 25000));
-        incomeList.add(new Income("2018","may", 35500,15000,10000));
+        incomeList.add(new Income("2018","december",55000,25000,15000));
+        incomeList.add(new Income("2018","november",65000,25000,15500));
+        incomeList.add(new Income("2018","may",68000,30000,20000));
          
         expenseList.add(new Expense("2018","may", 15000, 2300, 7000, 15500, 2300, 9000));
         expenseList.add(new Expense("2018","december", 17000, 2000, 8500, 12000, 2000, 5000));
@@ -170,7 +182,7 @@ public class MainApp extends Application {
      public  static Income getIncomeByMonthAndYear(String year, String month){
         Income tempIncome = new Income();
         for(Income inc : incomeList ){
-            if(inc.getYearString().equals(year) & inc.getMonthString().equals(month)){
+            if(inc.getYear().equals(year) & inc.getMonth().equals(month)){
                 tempIncome = inc;
             }                
         }            
@@ -180,7 +192,7 @@ public class MainApp extends Application {
     public static Expense getExpenseByMonthAndYear(String year, String month){
         Expense tempExpense = new Expense();
         for(Expense exp : expenseList){
-            if(exp.getYearString().equals(year) & exp.getMonthString().equals(month)){
+            if(exp.getYear().equals(year) & exp.getMonth().equals(month)){
                 tempExpense = exp;
             }                
         }            
@@ -196,12 +208,12 @@ public class MainApp extends Application {
     /* Для проверки
     public  void showTotalList(){
       for(Total total : totalList){
-          System.out.print("Итого за "+total.getMonth()+" "+total.getYear()+"г. "+ " Всего доходов: "+ total.getTotalIncome()+
+          System.out.print("Итого за "+total.getMonth()+" "+total.getYearProperty()+"г. "+ " Всего доходов: "+ total.getTotalIncome()+
                   ". Всего расходов :"+total.getTotalExpense()+". Чистый доход составил :"+total.getDifference());
           System.out.println();
       }
   } */
-    public void getAllDataForTotalList(){
+   public void getAllDataForTotalList(){
         Total tempTotal = new Total();
         totalList.clear();
         for(Income inc : incomeList){
@@ -209,7 +221,7 @@ public class MainApp extends Application {
             tempTtl.setYear(inc.getYear());
             tempTtl.setMonth(inc.getMonth());
             tempTtl.setTotalIncome(inc.getTotal());
-            tempTtl.setTotalExpense(getExpenseByMonthAndYear(inc.getYearString(),inc.getMonthString()).getTotal());
+            tempTtl.setTotalExpense(getExpenseByMonthAndYear(inc.getYear(),inc.getMonth()).getTotal());
             
             tempTotal = tempTtl;
             totalList.add(tempTotal);
@@ -231,7 +243,7 @@ public class MainApp extends Application {
       }
     }
     
-    public File getDaTAFilePath() {
+    public File getDaTaFilePath() {
        
          Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
        String filePath = prefs.get("filePath", null);
@@ -250,12 +262,12 @@ public class MainApp extends Application {
               
               DataWrapper wrapper = (DataWrapper)um.unmarshal(file);
               
-              getExpenseList().clear();
-              getIncomeList().clear();
-              getTotalList().clear();
-              getExpenseList().addAll(wrapper.getExpense());
-              getIncomeList().addAll(wrapper.getIncome());
-              getTotalList().addAll(wrapper.getTotal());              
+              expenseList.clear();
+              incomeList.clear();
+              totalList.clear();
+              expenseList.addAll(wrapper.getExpense());
+              incomeList.addAll(wrapper.getIncome());
+                           
               
               setDataFilePath(file);
               
@@ -271,28 +283,32 @@ public class MainApp extends Application {
      
      public void saveDataToFile(File file){
          
-         try{
-             JAXBContext context = JAXBContext.newInstance(DataWrapper.class);
+          try {
+              JAXBContext context = JAXBContext.newInstance(DataWrapper.class);
              Marshaller m = context.createMarshaller();
-             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);             
+             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
              
-             DataWrapper wrapper = new DataWrapper();
-             wrapper.setExpense(expenseList);
-             wrapper.setIncome(incomeList);
-             wrapper.setTotal(totalList);             
              
-             m.marshal(wrapper, file);             
+            
+             DataWrapper wrExp = new DataWrapper();
+             wrExp.setIncome(incomeList);
+             wrExp.setExpense(expenseList);             
              
-             setDataFilePath(file);         
-     } catch (Exception e) { 
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+             m.marshal(wrExp, file);
+             
+             setDataFilePath(file);    
+        
+        
+        
+    } catch (Exception e) { 
+        Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText("Could not save data");
         alert.setContentText("Could not save data to file:\n" + file.getPath());
 
         alert.showAndWait();
-      }        
-     }
+       }
+    }
     
 }
 

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="yan.algernon.moneyaccounting.fxml.MainViewController">
+   <children>
+      <ImageView fitHeight="1000.0" fitWidth="1200.0" focusTraversable="true" layoutY="7.0">
+         <image>
+            <Image url="@fon.jpg" />
+         </image>
+      </ImageView>
+      <HBox layoutX="400.0" layoutY="231.0" prefHeight="113.0" prefWidth="456.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#incomeButton" prefHeight="92.0" prefWidth="225.0" text="Доходы">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <font>
+                  <Font size="41.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#expenseButton" prefHeight="92.0" prefWidth="225.0" text="Расходы">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <font>
+                  <Font size="41.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <TableView fx:id="totalTable" layoutX="337.0" layoutY="421.0" prefHeight="377.0" prefWidth="527.0">
+        <columns>
+          <TableColumn fx:id="yearColumn" prefWidth="71.0" text="Год" />
+          <TableColumn fx:id="monthColumn" prefWidth="108.0" text="Месяц" />
+            <TableColumn fx:id="incomeTotalColumn" prefWidth="126.0" text="Доходы за месяц" />
+            <TableColumn fx:id="expenseTotalColumn" prefWidth="123.0" text="Расходы за месяц" />
+            <TableColumn fx:id="differenceColumn" prefWidth="96.0" text="Итого" />
+        </columns>
+      </TableView>
+      <Button layoutX="557.0" layoutY="336.0" mnemonicParsing="false" onAction="#renewData" prefHeight="71.0" prefWidth="138.0" text="Обновить данные" />
+   </children>
+</AnchorPane>

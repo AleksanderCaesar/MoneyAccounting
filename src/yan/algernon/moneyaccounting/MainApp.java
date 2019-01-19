@@ -72,7 +72,7 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {        
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Программа учета денежных средств");
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
         
         initRootLayout();
         initMainView(); 
@@ -98,8 +98,11 @@ public class MainApp extends Application {
         } catch (IOException e){
             e.printStackTrace();
         }
+        File file = getDaTaFilePath();
+           if (file != null) {
+            loadDataFromFile(file);
+           }
     }
-    
     
     public void initMainView (){        
           try {            
@@ -113,7 +116,8 @@ public class MainApp extends Application {
             
         }  catch (IOException e) {
             e.printStackTrace();
-        }          
+        }           
+    
     }
     
     

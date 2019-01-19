@@ -22,7 +22,7 @@
             </test-roots>
         </data>
         <libraries xmlns="http://www.netbeans.org/ns/ant-project-libraries/1">
-            <definitions>C:\Users\Alexander\Downloads\jdom-2.0.6\lib\nblibraries.properties</definitions>
+            <definitions>jdom-2.0.6\nblibraries.properties</definitions>
         </libraries>
     </configuration>
 </project>

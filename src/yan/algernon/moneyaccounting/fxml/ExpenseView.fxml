@@ -11,12 +11,12 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="yan.algernon.moneyaccounting.fxml.ExpenseViewController">
    <children>
-      <ImageView fitHeight="1000.0" fitWidth="1200.0" focusTraversable="true" layoutY="7.0">
+      <ImageView fitHeight="1000.0" fitWidth="1200.0" focusTraversable="true" layoutY="7.0" AnchorPane.bottomAnchor="-7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0">
          <image>
             <Image url="@fon.jpg" />
          </image>
       </ImageView>
-      <TableView fx:id="expenseTable" layoutX="113.0" layoutY="145.0" prefHeight="676.0" prefWidth="1000.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+      <TableView fx:id="expenseTable" layoutX="113.0" layoutY="145.0" prefHeight="676.0" prefWidth="1000.0" AnchorPane.bottomAnchor="179.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="145.0">
         <columns>
           <TableColumn fx:id="yearColumn" maxWidth="200.0" minWidth="50.0" prefWidth="100.0" text="Год" />
           <TableColumn fx:id="monthColumn" maxWidth="200.0" prefWidth="100.0" text="Месяц" />
@@ -29,7 +29,7 @@
             <TableColumn fx:id="totalColumn" maxWidth="200.0" prefWidth="90.0" style="-fx-alignment: center-right;" text="Итого" />
         </columns>
       </TableView>
-      <ButtonBar layoutX="273.0" layoutY="821.0" prefHeight="111.0" prefWidth="621.0">
+      <ButtonBar layoutX="273.0" layoutY="821.0" prefHeight="111.0" prefWidth="621.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="306.0" AnchorPane.topAnchor="600.0">
          <buttons>
             <Button mnemonicParsing="false" onAction="#addNewExpense" prefHeight="41.0" prefWidth="195.0" text="Добавить">
                <font>
